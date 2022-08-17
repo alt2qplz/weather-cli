@@ -5,7 +5,9 @@
   "description": "CLI for getting weather",
   "main": "index.js",
   "bin": "./index.js",
-  "cpu": ["!arm"],
+  "cpu": [
+    "!arm"
+  ],
   "engines": {
     "node": ">14"
   },
@@ -26,5 +28,8 @@
   },
   "bugs": {
     "email": "alt2qplz@gmail.com"
+  },
+  "dependencies": {
+    "axios": "^0.27.2"
   }
 }
