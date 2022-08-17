@@ -2,8 +2,7 @@
 
 import { getArgs } from './helpers/args.js';
 import {printHelp} from './services/log.sevice.js'
-
-
+import {saveKeyValue} from './services/storage.service.js'
 
 const initCLI = () => {
   const args = getArgs(process.argv)
@@ -14,7 +13,7 @@ const initCLI = () => {
     // сохранить город
   }
   if (args.t) {
-    // сохранить token
+    saveKeyValue('token', args.t);
   }
   //вывести погоду
 }
