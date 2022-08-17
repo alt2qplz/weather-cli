@@ -1,0 +1,30 @@
+{
+  "name": "weather-cli",
+  "version": "1.0.0",
+  "private": false,
+  "description": "CLI for getting weather",
+  "main": "index.js",
+  "bin": "./index.js",
+  "cpu": ["!arm"],
+  "engines": {
+    "node": ">14"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cli",
+    "weather"
+  ],
+  "author": "AMS",
+  "license": "ISC",
+  "homepage": "https://site123.ru",
+  "repository": {
+    "type": "git",
+    "url": "GIT_URL"
+  },
+  "bugs": {
+    "email": "alt2qplz@gmail.com"
+  }
+}
