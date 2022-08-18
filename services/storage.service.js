@@ -1,15 +1,38 @@
 import { homedir } from 'os';
 import { join, basename, dirname, extname, relative } from 'path';
-
-const filePath = join(homedir(), 'weather-cli', 'weather-data.json');
-
-const saveKeyValue = ( key, value ) => {
-  // console.log(basename(filePath));
-  // console.log(dirname(filePath));
-  // console.log(extname(filePath));
-  // console.log(relative(filePath, dirname(filePath)));
+import { promises } from 'fs';
 
 
+const FILE_PATH = join(homedir(), 'weather-data.json');
+
+const saveKeyValue = async ( key, value ) => {
+  const data = readFile(FILE_PATH);
+  data[key] = value;
+  await promises.writeFile(FILE_PATH, JSON.stringify(data));
 }
 
-export { saveKeyValue }
+const readFile = async (filePath) => {
+  if (await isExist(filePath)) {
+    const file = await promises.readFile(filePath);
+    return JSON.parse(file.toString('utf8'));
+  } else {
+    return {}
+  }
+}
+
+const getKeyValue = async (key) => {
+  const data = readFile(FILE_PATH);
+  if (data[key]) return data[key]
+  else return undefined
+}
+
+const isExist = async (path) => {
+  try {
+    await promises.stat(path);
+    return true
+  } catch {
+    return false
+  }
+}
+
+export { saveKeyValue, getKeyValue }
