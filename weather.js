@@ -26,18 +26,18 @@ const saveCity = async (city) => {
   }
 }
 
-const initCLI = () => {
+const initCLI = async () => {
   const args = getArgs(process.argv)
   if (args.h) {
     printHelp();
   }
   if (args.s) {
-    saveCity(args.s)
+    await saveCity(args.s)
   }
   if (args.t) {
-    saveToken(args.t);
+    await saveToken(args.t);
   }
-  //вывести погоду
+
 }
 
 initCLI();

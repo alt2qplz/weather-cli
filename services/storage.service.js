@@ -9,7 +9,7 @@ const TOKEN_DICTIONARY = {
 }
 
 const saveKeyValue = async ( key, value ) => {
-  const data = readFile(FILE_PATH);
+  const data = await readFile(FILE_PATH);
   data[key] = value;
   await promises.writeFile(FILE_PATH, JSON.stringify(data));
 }
@@ -17,7 +17,7 @@ const saveKeyValue = async ( key, value ) => {
 const readFile = async (filePath) => {
   if (await isExist(filePath)) {
     const file = await promises.readFile(filePath);
-    return JSON.parse(file.toString('utf8'));
+    return await JSON.parse(file.toString('utf8'));
   } else {
     return {}
   }
