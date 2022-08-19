@@ -2,7 +2,8 @@
 
 import { getArgs } from './helpers/args.js';
 import {printError, printHelp, printSuccess} from './services/log.sevice.js'
-import {saveKeyValue, TOKEN_DICTIONARY} from './services/storage.service.js'
+import { saveKeyValue, TOKEN_DICTIONARY, getKeyValue} from './services/storage.service.js'
+import { getWeather } from './services/api.service.js'
 
 const saveToken = async (token) => {
   if (!token.length) {
@@ -30,14 +31,13 @@ const initCLI = async () => {
   const args = getArgs(process.argv)
   if (args.h) {
     printHelp();
+    return;
   }
-  if (args.s) {
-    await saveCity(args.s)
-  }
-  if (args.t) {
-    await saveToken(args.t);
-  }
-
+  if (args.s) await saveCity(args.s)
+  if (args.t) await saveToken(args.t)
+  const city = await getKeyValue(TOKEN_DICTIONARY.city);
+  if (!city) printError('Город не выбран');
+  else console.log(await getWeather(city));
 }
 
 initCLI();
