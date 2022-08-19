@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { getArgs } from './helpers/args.js';
-import {printError, printHelp, printSuccess} from './services/log.sevice.js'
+import {printError, printHelp, printSuccess, printWeather} from './services/log.sevice.js'
 import { saveKeyValue, TOKEN_DICTIONARY, getKeyValue} from './services/storage.service.js'
 import { getWeather } from './services/api.service.js'
 
@@ -32,7 +32,7 @@ const getForcast = async () => {
   if (!city) printError('Город не выбран');
   try {
     const weather = await getWeather(city)
-    console.log(weather);
+    printWeather(weather, )
   } catch (e) {
     printError(e.message)
   }
