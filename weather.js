@@ -27,17 +27,29 @@ const saveCity = async (city) => {
   }
 }
 
-const initCLI = async () => {
-  const args = getArgs(process.argv)
-  if (args.h) {
-    printHelp();
-    return;
-  }
-  if (args.s) await saveCity(args.s)
-  if (args.t) await saveToken(args.t)
+const getForcast = async () => {
   const city = await getKeyValue(TOKEN_DICTIONARY.city);
   if (!city) printError('Город не выбран');
-  else console.log(await getWeather(city));
+  try {
+    const weather = await getWeather(city)
+    console.log(weather);
+  } catch (e) {
+    printError(e.message)
+  }
+}
+
+const initCLI = async () => {
+  const args = getArgs(process.argv)
+  if (Object.keys(args).length) {
+    if (args.h) {
+      printHelp();
+      return;
+    }
+    if (args.s) await saveCity(args.s)
+    if (args.t) await saveToken(args.t)
+  } else {
+    await getForcast();
+  }
 }
 
 initCLI();
